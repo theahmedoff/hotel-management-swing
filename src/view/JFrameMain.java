@@ -5,17 +5,24 @@
  */
 package view;
 
+import dao.RoomDAOImpl;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Room;
+
 /**
  *
  * @author Ahme_vn75
  */
 public class JFrameMain extends javax.swing.JFrame {
+    RoomDAOImpl roomDAOImpl = new RoomDAOImpl();
 
     /**
      * Creates new form JFrameMain
      */
     public JFrameMain() {
         initComponents();
+        setRoomTable();
     }
 
     /**
@@ -27,17 +34,56 @@ public class JFrameMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableRoom = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        rezerv = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTableRoom.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Property", "Type", "View", "Adult No", "Child No", "Number", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableRoom);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Hotel Managment Room Table");
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        rezerv.setText("Rezerv");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1143, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(rezerv, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(rezerv, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -79,5 +125,28 @@ public class JFrameMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableRoom;
+    private javax.swing.JButton rezerv;
     // End of variables declaration//GEN-END:variables
+
+    public void setRoomTable() {
+        List<Room> rooms = roomDAOImpl.getAllRoom();
+        DefaultTableModel dm = new DefaultTableModel();
+        dm.addColumn("ID");
+        dm.addColumn("Property");
+        dm.addColumn("Type");
+        dm.addColumn("View");
+        dm.addColumn("Adult No");
+        dm.addColumn("Child No");
+        dm.addColumn("Number");
+        dm.addColumn("Status");
+        for(Room item : rooms){
+            dm.addRow(new Object[]{item.getId(), item.getProperty(), item.getType(), item.getView(), item.getAdultNo(), item.getChildNo(), item.getNumber(), item.isStatus()});
+            jTableRoom.setModel(dm);
+        }
+    }
+
+   
 }
