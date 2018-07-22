@@ -80,9 +80,11 @@ public class Admin {
         this.lastLoginDate = lastLoginDate;
     }
 
-    public void getLastLoginDate(String last_login_date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public String toString() {
+        return "Admin{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", username=" + username + ", password=" + password + ", lastLoginDate=" + lastLoginDate + '}';
     }
+
     
     
     

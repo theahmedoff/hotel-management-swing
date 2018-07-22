@@ -5,6 +5,8 @@
  */
 package util;
 
+import dao.LoginDAOImpl;
+import dao.WorkerDAOImpl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Worker;
 
 /**
  *
@@ -25,7 +28,7 @@ public class DBUtil {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/hotel";
             String username = "root";
-            String password = "";
+            String password = "aa121212";
             con = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +56,7 @@ public class DBUtil {
     }
     
     public static void main(String[] args) {
-        Connection con = getConnections();
+        
     }
     
 }

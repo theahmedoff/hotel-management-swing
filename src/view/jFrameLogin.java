@@ -5,21 +5,27 @@
  */
 package view;
 
-import dao.AdminDAOImpl;
+import dao.LoginDAOImpl;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import model.Admin;
+import model.Worker;
 
 /**
  *
  * @author Ahme_vn75
  */
 public class jFrameLogin extends javax.swing.JFrame {
-    AdminDAOImpl dao = new AdminDAOImpl();
+    LoginDAOImpl dao = new LoginDAOImpl();
     /**
      * Creates new form jFrameLogin
      */
     public jFrameLogin() {
         initComponents();
+        getAll();
     }
 
     /**
@@ -31,16 +37,19 @@ public class jFrameLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg = new javax.swing.ButtonGroup();
         jTextFieldUsername = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPasswordFieldPassword = new javax.swing.JPasswordField();
         jButtonLogin = new javax.swing.JButton();
+        jRadioButtonAdmin = new javax.swing.JRadioButton();
+        jRadioButtonWorker = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextFieldUsername.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextFieldUsername.setText("Admin");
+        jTextFieldUsername.setText("akmedoff");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Username");
@@ -59,26 +68,38 @@ public class jFrameLogin extends javax.swing.JFrame {
             }
         });
 
+        jRadioButtonAdmin.setText("Admin");
+
+        jRadioButtonWorker.setText("Worker");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordFieldPassword)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPasswordFieldPassword)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jRadioButtonAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jRadioButtonWorker)))))
+                .addContainerGap(66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(95, Short.MAX_VALUE)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -86,29 +107,48 @@ public class jFrameLogin extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPasswordFieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButtonAdmin)
+                    .addComponent(jRadioButtonWorker))
+                .addGap(18, 18, 18)
                 .addComponent(jButtonLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
-
-        jLabel1.getAccessibleContext().setAccessibleName("Username");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         String username = jTextFieldUsername.getText();
-        String password = jPasswordFieldPassword.getPassword().toString();
+        String password = String.valueOf(jPasswordFieldPassword.getPassword());
+        //System.out.println(password);
+        String rb = getRadioButton();
         
-        Admin admin = dao.checkLogin(username, password);
-
-        if (admin.getUsername().equals(username) && admin.getPassword().equals(password)) {
+        boolean result = false;
+        
+        
+        
+        if (rb.equals("Admin")) {
+            Admin admin = dao.checkLoginAdmin(username, password);
+            System.out.println(admin);
+            String data = admin.getName() + " " + admin.getSurname() + "\n" + admin.getLastLoginDate();
+            JOptionPane.showMessageDialog(this, data, "Welcome Admin", JOptionPane.INFORMATION_MESSAGE);
             JFrameMain main = new JFrameMain();
             main.setVisible(true);
             this.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
+            result = true;
+        }else if(result != true){
+            JOptionPane.showMessageDialog(this, "Istifadeci login parol sefdi!", "Error", JOptionPane.WARNING_MESSAGE);
         }
+        if(rb.equals("Worker")){
+            Worker worker = dao.checkLoginWorker(username, password);
+            String data = worker.getName() + " " + worker.getSurname() + "\n" + worker.getPosition();
+            JOptionPane.showMessageDialog(this, data, "Welcome Worker", JOptionPane.INFORMATION_MESSAGE);
+        }else if(result != true){
+            JOptionPane.showMessageDialog(this, "Istifadeci login parol sefdi!", "Error", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     /**
@@ -147,10 +187,36 @@ public class jFrameLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bg;
     private javax.swing.JButton jButtonLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordFieldPassword;
+    private javax.swing.JRadioButton jRadioButtonAdmin;
+    private javax.swing.JRadioButton jRadioButtonWorker;
     private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
+
+    private String getRadioButton() {
+        bg = new ButtonGroup();
+        bg.add(jRadioButtonAdmin);
+        bg.add(jRadioButtonWorker);
+        
+        
+        for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
+
+    private void getAll() {
+      
+        Admin admin = dao.checkLoginAdmin("akmedoff", "121212");
+        
+        System.out.println(admin);
+    }
 }

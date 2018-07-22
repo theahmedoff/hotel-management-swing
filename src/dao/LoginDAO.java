@@ -5,14 +5,19 @@
  */
 package dao;
 
+import java.util.List;
 import model.Admin;
+import model.Worker;
 
 /**
  *
  * @author Ahme_vn75
  */
-public interface AdminDAO {
+public interface LoginDAO {
     
-    Admin checkLogin(String username, String password);
+    
+    
+    Admin checkLoginAdmin(String username, String password);
+    Worker checkLoginWorker(String username, String password);
     
 }

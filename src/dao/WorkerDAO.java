@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package dao;
 
-import java.time.LocalDate;
+import java.util.List;
+import model.Worker;
 
 /**
  *
- * @author Ahme_vn75
+ * @author Ahmedov
  */
-public class Customer {
+public interface WorkerDAO {
     
+    List<Worker> getAllWorker();
     
 }
