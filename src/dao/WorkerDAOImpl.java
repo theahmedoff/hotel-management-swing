@@ -33,9 +33,18 @@ public class WorkerDAOImpl implements WorkerDAO{
             rs = ps.executeQuery();
             while(rs.next()){
                 Worker w = new Worker();
+                w.setId(rs.getInt("id"));
                 w.setName(rs.getString("name"));
                 w.setSurname(rs.getString("surname"));
+                w.setGender(rs.getString("gender"));
+                w.setDate(rs.getDate("date_of_birth").toLocalDate());
                 w.setEmail(rs.getString("email"));
+                w.setPhone(rs.getString("phone"));
+                w.setAddress(rs.getString("address"));
+                w.setPosition(rs.getString("position"));
+                w.setSalary(rs.getString("salary"));
+                w.setUsername(rs.getString("username"));
+                w.setPassword(rs.getString("password"));
                 workers.add(w);
             }
         }catch(SQLException e){

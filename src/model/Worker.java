@@ -21,14 +21,14 @@ public class Worker {
     private String phone;
     private String address;
     private String position;
-    private double salary;
+    private String salary;
     private String username;
     private String password;
 
     public Worker() {
     }
 
-    public Worker(int id, String name, String surname, String gender, LocalDate date, String email, String phone, String address, String position, double salary, String username, String password) {
+    public Worker(int id, String name, String surname, String gender, LocalDate date, String email, String phone, String address, String position, String salary, String username, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -115,11 +115,11 @@ public class Worker {
         this.position = position;
     }
 
-    public double getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 

@@ -5,18 +5,35 @@
  */
 package view;
 
+import dao.CustomerDAOImpl;
+import dao.RoomDAOImpl;
+import dao.WorkerDAOImpl;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import model.Customer;
+import model.Room;
+import model.Worker;
+
 /**
  *
  * @author Ahmedov
  */
 public class JFrameAdminController extends javax.swing.JFrame {
+    
+    RoomDAOImpl roomDAO = new RoomDAOImpl();
+    WorkerDAOImpl workerDAO = new WorkerDAOImpl();
+    CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 
     /**
      * Creates new form JFrameAdminController
      */
     public JFrameAdminController() {
         initComponents();
-       
+        getPanelRoom();
+        setRoomTable();
     }
 
     /**
@@ -50,18 +67,18 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableCustomer = new javax.swing.JTable();
         jTextFieldCustomerSearch = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jButtonCustomerRemove = new javax.swing.JButton();
         jButtonCustomerEdit = new javax.swing.JButton();
         jButtonCustomerCreate = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jPanelWorker = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
+        jScrollPane6 = new javax.swing.JScrollPane();
         jTableWorker = new javax.swing.JTable();
         jTextFieldWorkerSearch = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jButtonWorkerRemove = new javax.swing.JButton();
         jButtonWorkerEdit = new javax.swing.JButton();
         jButtonWorkerCreate = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jPanelRoom = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableRoom = new javax.swing.JTable();
@@ -135,6 +152,11 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonCustomer.setText("   CUSTOMER");
         jButtonCustomer.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButtonCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCustomerActionPerformed(evt);
+            }
+        });
         sidepanel.add(jButtonCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 240, 60));
 
         jButtonWorker.setBackground(new java.awt.Color(56, 104, 119));
@@ -143,6 +165,11 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonWorker.setText("   Worker");
         jButtonWorker.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonWorker.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jButtonWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWorkerActionPerformed(evt);
+            }
+        });
         sidepanel.add(jButtonWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 240, 60));
 
         bg.add(sidepanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 540));
@@ -170,12 +197,15 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jTextFieldBookingSearch.setText("ROOM SEARCH");
         jTextFieldBookingSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
+        jButtonBookingRemove.setBackground(new java.awt.Color(54, 224, 203));
         jButtonBookingRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonBookingRemove.setText("Remove");
 
+        jButtonBookingEdit.setBackground(new java.awt.Color(54, 224, 203));
         jButtonBookingEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonBookingEdit.setText("Edit");
 
+        jButtonBookingCreate.setBackground(new java.awt.Color(54, 224, 203));
         jButtonBookingCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonBookingCreate.setText("Create");
 
@@ -242,55 +272,58 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jTextFieldCustomerSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextFieldCustomerSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldCustomerSearch.setText("ROOM SEARCH");
+        jTextFieldCustomerSearch.setText("Customer SEARCH");
         jTextFieldCustomerSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        jButtonCustomerRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonCustomerRemove.setText("Remove");
-
-        jButtonCustomerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonCustomerEdit.setText("Edit");
-
-        jButtonCustomerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonCustomerCreate.setText("Create");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel3.setText("Customer Controller");
+
+        jButtonCustomerRemove.setBackground(new java.awt.Color(103, 224, 54));
+        jButtonCustomerRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerRemove.setText("Remove");
+
+        jButtonCustomerEdit.setBackground(new java.awt.Color(103, 224, 54));
+        jButtonCustomerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerEdit.setText("Edit");
+
+        jButtonCustomerCreate.setBackground(new java.awt.Color(103, 224, 54));
+        jButtonCustomerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerCreate.setText("Create");
 
         javax.swing.GroupLayout jPanelCustomerLayout = new javax.swing.GroupLayout(jPanelCustomer);
         jPanelCustomer.setLayout(jPanelCustomerLayout);
         jPanelCustomerLayout.setHorizontalGroup(
             jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCustomerLayout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
-                            .addComponent(jButtonCustomerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(62, 62, 62)
-                            .addComponent(jButtonCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(74, 74, 74)
-                            .addComponent(jButtonCustomerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(103, 103, 103))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                        .addComponent(jButtonCustomerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButtonCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonCustomerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                        .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(36, 36, 36)))))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))))
+            .addGroup(jPanelCustomerLayout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelCustomerLayout.setVerticalGroup(
             jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCustomerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jTextFieldCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCustomerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -313,35 +346,33 @@ public class JFrameAdminController extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTableWorker);
+        jScrollPane6.setViewportView(jTableWorker);
 
         jTextFieldWorkerSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jTextFieldWorkerSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFieldWorkerSearch.setText("ROOM SEARCH");
+        jTextFieldWorkerSearch.setText("Customer SEARCH");
         jTextFieldWorkerSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jTextFieldWorkerSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldWorkerSearchActionPerformed(evt);
-            }
-        });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel6.setText("Worker Controller");
+
+        jButtonWorkerRemove.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonWorkerRemove.setText("Remove");
 
+        jButtonWorkerEdit.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonWorkerEdit.setText("Edit");
 
+        jButtonWorkerCreate.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonWorkerCreate.setText("Create");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel4.setText("Room Controller");
 
         javax.swing.GroupLayout jPanelWorkerLayout = new javax.swing.GroupLayout(jPanelWorker);
         jPanelWorker.setLayout(jPanelWorkerLayout);
         jPanelWorkerLayout.setHorizontalGroup(
             jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
+            .addGroup(jPanelWorkerLayout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
@@ -354,22 +385,22 @@ public class JFrameAdminController extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
                         .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldWorkerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36))))
             .addGroup(jPanelWorkerLayout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(jLabel4)
+                .addGap(238, 238, 238)
+                .addComponent(jLabel6)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelWorkerLayout.setVerticalGroup(
             jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelWorkerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jTextFieldWorkerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,12 +426,15 @@ public class JFrameAdminController extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableRoom);
 
+        jButtonRoomRemove.setBackground(new java.awt.Color(95, 102, 205));
         jButtonRoomRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonRoomRemove.setText("Edit");
 
+        jButtonRoomEdit.setBackground(new java.awt.Color(95, 102, 205));
         jButtonRoomEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonRoomEdit.setText("Create");
 
+        jButtonRoomCreate.setBackground(new java.awt.Color(95, 102, 205));
         jButtonRoomCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonRoomCreate.setText("Remove");
         jButtonRoomCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -413,9 +447,14 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jTextFieldRoomSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldRoomSearch.setText("ROOM SEARCH");
         jTextFieldRoomSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextFieldRoomSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldRoomSearchKeyReleased(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        jLabel5.setText("Booking Controller");
+        jLabel5.setText("Room Controller");
 
         javax.swing.GroupLayout jPanelRoomLayout = new javax.swing.GroupLayout(jPanelRoom);
         jPanelRoom.setLayout(jPanelRoomLayout);
@@ -495,23 +534,56 @@ public class JFrameAdminController extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPanelRoom.setVisible(true);
         jPanelBooking.setVisible(false);
+        jPanelCustomer.setVisible(false);
+        jPanelWorker.setVisible(false);
     }//GEN-LAST:event_jButtonRoomActionPerformed
 
     private void jButtonBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookingActionPerformed
         // TODO add your handling code here:
-        jPanelBooking.setVisible(true);
         jPanelRoom.setVisible(false);
-
+        jPanelBooking.setVisible(true);
+        jPanelCustomer.setVisible(false);
+        jPanelWorker.setVisible(false);
     }//GEN-LAST:event_jButtonBookingActionPerformed
-
-    private void jTextFieldWorkerSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWorkerSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldWorkerSearchActionPerformed
 
     private void jButtonRoomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRoomCreateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRoomCreateActionPerformed
 
+    private void jButtonCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCustomerActionPerformed
+        // TODO add your handling code here:
+        setCustomerTable();
+        jPanelRoom.setVisible(false);
+        jPanelBooking.setVisible(false);
+        jPanelCustomer.setVisible(true);
+        jPanelWorker.setVisible(false);
+    }//GEN-LAST:event_jButtonCustomerActionPerformed
+
+    private void jButtonWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWorkerActionPerformed
+        // TODO add your handling code here:
+        setWorkerTable();
+        jPanelRoom.setVisible(false);
+        jPanelBooking.setVisible(false);
+        jPanelCustomer.setVisible(false);
+        jPanelWorker.setVisible(true);
+    }//GEN-LAST:event_jButtonWorkerActionPerformed
+
+    private void jTextFieldRoomSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldRoomSearchKeyReleased
+        //String search = jTextFieldRoomSearch.getText();
+        //setRoomTable();
+        //dinamikSearch(search);
+        
+    }//GEN-LAST:event_jTextFieldRoomSearchKeyReleased
+
+    public void dinamikSearch(String search){
+       //TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(dtm);
+       
+       //jTableRoom.setRowSorter(trs);
+       
+       //trs.setRowFilter(RowFilter.regexFilter(search)); 
+       
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -569,8 +641,8 @@ public class JFrameAdminController extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelBooking;
@@ -581,7 +653,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableBooking;
     private javax.swing.JTable jTableCustomer;
@@ -593,4 +665,91 @@ public class JFrameAdminController extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldWorkerSearch;
     private javax.swing.JPanel sidepanel;
     // End of variables declaration//GEN-END:variables
+
+    private void getPanelRoom() {
+        jPanelRoom.setVisible(true);
+        jPanelBooking.setVisible(false);
+        jPanelCustomer.setVisible(false);
+        jPanelWorker.setVisible(false);
+    }
+
+    private void setRoomTable() {
+        
+        List<Room> rooms = roomDAO.getAllRoom();
+        
+        DefaultTableModel dtm = new DefaultTableModel();
+        
+        dtm.addColumn("ID");
+        dtm.addColumn("Property");
+        dtm.addColumn("Type");
+        dtm.addColumn("View");
+        dtm.addColumn("Adult no");
+        dtm.addColumn("Child no");
+        dtm.addColumn("Number");
+        dtm.addColumn("Status");
+        
+        for(Room item : rooms){
+            dtm.addRow(new Object[]{item.getId(), item.getProperty(), item.getType(), item.getView(), 
+            item.getAdultNo(), item.getChildNo(), item.getNumber(), item.isStatus()});
+        }
+        
+        jTableRoom.setModel(dtm);
+    }
+
+    private void setWorkerTable() {
+
+        List<Worker> workers = workerDAO.getAllWorker();
+        
+        DefaultTableModel dtm = new DefaultTableModel();
+        
+        dtm.addColumn("ID");
+        dtm.addColumn("Name");
+        dtm.addColumn("Surname");
+        dtm.addColumn("Gender");
+        dtm.addColumn("Date Of Birth");
+        dtm.addColumn("E-Mail");
+        dtm.addColumn("Phone");
+        dtm.addColumn("Address");
+        dtm.addColumn("Posotion");
+        dtm.addColumn("Salary");
+        dtm.addColumn("Username");
+        dtm.addColumn("Password");
+        
+        for(Worker item : workers){
+            dtm.addRow(new Object[]{item.getId(), item.getName(), item.getSurname(),
+                    item.getGender(), item.getDate(), item.getEmail(), item.getPhone(),
+                    item.getAddress(), item.getPosition(), item.getSalary(),
+                    item.getUsername(), item.getPassword()});
+            //System.out.println(item);
+        }
+        
+        jTableWorker.setModel(dtm);
+
+    }
+
+    private void setCustomerTable() {
+
+        List<Customer> customers = customerDAO.getAllCustomer();
+        
+        DefaultTableModel dtm = new DefaultTableModel();
+        
+        dtm.addColumn("ID");
+        dtm.addColumn("Name");
+        dtm.addColumn("Surname");
+        dtm.addColumn("Date of Birth");
+        dtm.addColumn("Gender");
+        dtm.addColumn("Address");
+        dtm.addColumn("Phone");
+        dtm.addColumn("E-Mail");
+        dtm.addColumn("Nationality");
+        
+        for(Customer item : customers){
+            dtm.addRow(new Object[]{item.getId(), item.getName(), item.getSurname(), 
+                        item.getDate(), item.getGender(), item.getAddress(),
+                        item.getPhone(), item.getEmail(), item.getNationality()});
+        }
+        
+        jTableCustomer.setModel(dtm);
+
+    }
 }
