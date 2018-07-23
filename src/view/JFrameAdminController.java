@@ -28,6 +28,8 @@ public class JFrameAdminController extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         bg = new javax.swing.JPanel();
         sidepanel = new javax.swing.JPanel();
         jButtonExit = new javax.swing.JButton();
@@ -36,16 +38,53 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonCustomer = new javax.swing.JButton();
         jButtonWorker = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanelBooking = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableBooking = new javax.swing.JTable();
+        jTextFieldBookingSearch = new javax.swing.JTextField();
+        jButtonBookingRemove = new javax.swing.JButton();
+        jButtonBookingEdit = new javax.swing.JButton();
+        jButtonBookingCreate = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jPanelCustomer = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTableCustomer = new javax.swing.JTable();
+        jTextFieldCustomerSearch = new javax.swing.JTextField();
+        jButtonCustomerRemove = new javax.swing.JButton();
+        jButtonCustomerEdit = new javax.swing.JButton();
+        jButtonCustomerCreate = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanelWorker = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableWorker = new javax.swing.JTable();
+        jTextFieldWorkerSearch = new javax.swing.JTextField();
+        jButtonWorkerRemove = new javax.swing.JButton();
+        jButtonWorkerEdit = new javax.swing.JButton();
+        jButtonWorkerCreate = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jPanelRoom = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableRoom = new javax.swing.JTable();
-        jPanelBooking = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanelCustomer = new javax.swing.JPanel();
-        jPanelWorker = new javax.swing.JPanel();
+        jButtonRoomRemove = new javax.swing.JButton();
+        jButtonRoomEdit = new javax.swing.JButton();
+        jButtonRoomCreate = new javax.swing.JButton();
+        jTextFieldRoomSearch = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -67,7 +106,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonRoom.setBackground(new java.awt.Color(56, 104, 119));
         jButtonRoom.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButtonRoom.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\room_icon.png")); // NOI18N
-        jButtonRoom.setText("   Room");
+        jButtonRoom.setText("   ROOM");
         jButtonRoom.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRoom.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButtonRoom.addActionListener(new java.awt.event.ActionListener() {
@@ -80,9 +119,9 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonBooking.setBackground(new java.awt.Color(56, 104, 119));
         jButtonBooking.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButtonBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\booking_icon.png")); // NOI18N
+        jButtonBooking.setText("   BOOKING");
         jButtonBooking.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonBooking.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        jButtonBooking.setLabel("   Booking");
         jButtonBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBookingActionPerformed(evt);
@@ -93,7 +132,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonCustomer.setBackground(new java.awt.Color(56, 104, 119));
         jButtonCustomer.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jButtonCustomer.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\customer.png")); // NOI18N
-        jButtonCustomer.setText("   Customer");
+        jButtonCustomer.setText("   CUSTOMER");
         jButtonCustomer.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         sidepanel.add(jButtonCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 240, 60));
@@ -111,6 +150,236 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(56, 141, 173));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanelBooking.setBackground(new java.awt.Color(56, 141, 173));
+
+        jTableBooking.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTableBooking);
+
+        jTextFieldBookingSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextFieldBookingSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldBookingSearch.setText("ROOM SEARCH");
+        jTextFieldBookingSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jButtonBookingRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonBookingRemove.setText("Remove");
+
+        jButtonBookingEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonBookingEdit.setText("Edit");
+
+        jButtonBookingCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonBookingCreate.setText("Create");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel2.setText("Booking Controller");
+
+        javax.swing.GroupLayout jPanelBookingLayout = new javax.swing.GroupLayout(jPanelBooking);
+        jPanelBooking.setLayout(jPanelBookingLayout);
+        jPanelBookingLayout.setHorizontalGroup(
+            jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBookingLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBookingLayout.createSequentialGroup()
+                        .addComponent(jButtonBookingRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButtonBookingEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonBookingCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBookingLayout.createSequentialGroup()
+                        .addGroup(jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldBookingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))))
+            .addGroup(jPanelBookingLayout.createSequentialGroup()
+                .addGap(238, 238, 238)
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanelBookingLayout.setVerticalGroup(
+            jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBookingLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(jTextFieldBookingSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonBookingEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBookingCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBookingRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanelBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
+
+        jPanelCustomer.setBackground(new java.awt.Color(56, 141, 173));
+
+        jTableCustomer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTableCustomer);
+
+        jTextFieldCustomerSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextFieldCustomerSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldCustomerSearch.setText("ROOM SEARCH");
+        jTextFieldCustomerSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jButtonCustomerRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerRemove.setText("Remove");
+
+        jButtonCustomerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerEdit.setText("Edit");
+
+        jButtonCustomerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCustomerCreate.setText("Create");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel3.setText("Customer Controller");
+
+        javax.swing.GroupLayout jPanelCustomerLayout = new javax.swing.GroupLayout(jPanelCustomer);
+        jPanelCustomer.setLayout(jPanelCustomerLayout);
+        jPanelCustomerLayout.setHorizontalGroup(
+            jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCustomerLayout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                            .addComponent(jButtonCustomerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(62, 62, 62)
+                            .addComponent(jButtonCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(74, 74, 74)
+                            .addComponent(jButtonCustomerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(103, 103, 103))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCustomerLayout.createSequentialGroup()
+                            .addComponent(jTextFieldCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(36, 36, 36)))))
+        );
+        jPanelCustomerLayout.setVerticalGroup(
+            jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCustomerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldCustomerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCustomerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCustomerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCustomerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanelCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
+
+        jPanelWorker.setBackground(new java.awt.Color(56, 141, 173));
+
+        jTableWorker.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane5.setViewportView(jTableWorker);
+
+        jTextFieldWorkerSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextFieldWorkerSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldWorkerSearch.setText("ROOM SEARCH");
+        jTextFieldWorkerSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextFieldWorkerSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldWorkerSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonWorkerRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonWorkerRemove.setText("Remove");
+
+        jButtonWorkerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonWorkerEdit.setText("Edit");
+
+        jButtonWorkerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonWorkerCreate.setText("Create");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel4.setText("Room Controller");
+
+        javax.swing.GroupLayout jPanelWorkerLayout = new javax.swing.GroupLayout(jPanelWorker);
+        jPanelWorker.setLayout(jPanelWorkerLayout);
+        jPanelWorkerLayout.setHorizontalGroup(
+            jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
+                        .addComponent(jButtonWorkerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButtonWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonWorkerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelWorkerLayout.createSequentialGroup()
+                        .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldWorkerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))))
+            .addGroup(jPanelWorkerLayout.createSequentialGroup()
+                .addGap(230, 230, 230)
+                .addComponent(jLabel4)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanelWorkerLayout.setVerticalGroup(
+            jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelWorkerLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldWorkerSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonWorkerEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWorkerCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonWorkerRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel3.add(jPanelWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
+
         jPanelRoom.setBackground(new java.awt.Color(56, 141, 173));
 
         jTableRoom.setModel(new javax.swing.table.DefaultTableModel(
@@ -126,88 +395,70 @@ public class JFrameAdminController extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableRoom);
 
+        jButtonRoomRemove.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonRoomRemove.setText("Edit");
+
+        jButtonRoomEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonRoomEdit.setText("Create");
+
+        jButtonRoomCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonRoomCreate.setText("Remove");
+        jButtonRoomCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRoomCreateActionPerformed(evt);
+            }
+        });
+
+        jTextFieldRoomSearch.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTextFieldRoomSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFieldRoomSearch.setText("ROOM SEARCH");
+        jTextFieldRoomSearch.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabel5.setText("Booking Controller");
+
         javax.swing.GroupLayout jPanelRoomLayout = new javax.swing.GroupLayout(jPanelRoom);
         jPanelRoom.setLayout(jPanelRoomLayout);
         jPanelRoomLayout.setHorizontalGroup(
             jPanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRoomLayout.createSequentialGroup()
                 .addContainerGap(46, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGroup(jPanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRoomLayout.createSequentialGroup()
+                        .addComponent(jButtonRoomCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jButtonRoomRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(74, 74, 74)
+                        .addComponent(jButtonRoomEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRoomLayout.createSequentialGroup()
+                        .addGroup(jPanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldRoomSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36))))
+            .addGroup(jPanelRoomLayout.createSequentialGroup()
+                .addGap(239, 239, 239)
+                .addComponent(jLabel5)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelRoomLayout.setVerticalGroup(
             jPanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelRoomLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldRoomSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelRoomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRoomRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRoomEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRoomCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel3.add(jPanelRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
-
-        jPanelBooking.setBackground(new java.awt.Color(56, 141, 173));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanelBookingLayout = new javax.swing.GroupLayout(jPanelBooking);
-        jPanelBooking.setLayout(jPanelBookingLayout);
-        jPanelBookingLayout.setHorizontalGroup(
-            jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBookingLayout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 724, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-        );
-        jPanelBookingLayout.setVerticalGroup(
-            jPanelBookingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBookingLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(146, Short.MAX_VALUE))
-        );
-
-        jPanel3.add(jPanelBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
-
-        jPanelCustomer.setBackground(new java.awt.Color(56, 141, 173));
-
-        javax.swing.GroupLayout jPanelCustomerLayout = new javax.swing.GroupLayout(jPanelCustomer);
-        jPanelCustomer.setLayout(jPanelCustomerLayout);
-        jPanelCustomerLayout.setHorizontalGroup(
-            jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
-        jPanelCustomerLayout.setVerticalGroup(
-            jPanelCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanelCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
-
-        jPanelWorker.setBackground(new java.awt.Color(56, 141, 173));
-
-        javax.swing.GroupLayout jPanelWorkerLayout = new javax.swing.GroupLayout(jPanelWorker);
-        jPanelWorker.setLayout(jPanelWorkerLayout);
-        jPanelWorkerLayout.setHorizontalGroup(
-            jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
-        );
-        jPanelWorkerLayout.setVerticalGroup(
-            jPanelWorkerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-
-        jPanel3.add(jPanelWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 2, 820, 450));
 
         bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 810, 450));
 
@@ -221,16 +472,16 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
+                .addContainerGap(176, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(149, 149, 149))
+                .addGap(173, 173, 173))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 810, 90));
@@ -252,6 +503,14 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jPanelRoom.setVisible(false);
 
     }//GEN-LAST:event_jButtonBookingActionPerformed
+
+    private void jTextFieldWorkerSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldWorkerSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldWorkerSearchActionPerformed
+
+    private void jButtonRoomCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRoomCreateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRoomCreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,11 +550,27 @@ public class JFrameAdminController extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
     private javax.swing.JButton jButtonBooking;
+    private javax.swing.JButton jButtonBookingCreate;
+    private javax.swing.JButton jButtonBookingEdit;
+    private javax.swing.JButton jButtonBookingRemove;
     private javax.swing.JButton jButtonCustomer;
+    private javax.swing.JButton jButtonCustomerCreate;
+    private javax.swing.JButton jButtonCustomerEdit;
+    private javax.swing.JButton jButtonCustomerRemove;
     private javax.swing.JButton jButtonExit;
     private javax.swing.JButton jButtonRoom;
+    private javax.swing.JButton jButtonRoomCreate;
+    private javax.swing.JButton jButtonRoomEdit;
+    private javax.swing.JButton jButtonRoomRemove;
     private javax.swing.JButton jButtonWorker;
+    private javax.swing.JButton jButtonWorkerCreate;
+    private javax.swing.JButton jButtonWorkerEdit;
+    private javax.swing.JButton jButtonWorkerRemove;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanelBooking;
@@ -304,8 +579,18 @@ public class JFrameAdminController extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelWorker;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableBooking;
+    private javax.swing.JTable jTableCustomer;
     private javax.swing.JTable jTableRoom;
+    private javax.swing.JTable jTableWorker;
+    private javax.swing.JTextField jTextFieldBookingSearch;
+    private javax.swing.JTextField jTextFieldCustomerSearch;
+    private javax.swing.JTextField jTextFieldRoomSearch;
+    private javax.swing.JTextField jTextFieldWorkerSearch;
     private javax.swing.JPanel sidepanel;
     // End of variables declaration//GEN-END:variables
 }
