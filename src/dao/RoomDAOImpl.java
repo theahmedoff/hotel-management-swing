@@ -50,6 +50,26 @@ public class RoomDAOImpl implements RoomDAO{
         }
         return rooms;
     }
+
+    @Override
+    public boolean removeRoomRow(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String sql = "delete from room where id = ?";
+        boolean result = false;
+        try{
+            con = DBUtil.getConnections();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            result = true;;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            DBUtil.CloseAll(con, ps, null);
+        }
+        return result;
+    }
     
     
     

@@ -19,5 +19,5 @@ import model.Room;
 public interface RoomDAO {
     
     List<Room> getAllRoom();
-    
+    boolean removeRoomRow(int id);
 }
