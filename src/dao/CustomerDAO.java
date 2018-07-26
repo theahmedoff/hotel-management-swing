@@ -20,5 +20,7 @@ import util.DBUtil;
  */
 public interface CustomerDAO {
     List<Customer> getAllCustomer();
+    boolean createCustomer(Customer c);
+    
        
 }

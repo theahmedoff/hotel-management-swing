@@ -5,17 +5,76 @@
  */
 package view;
 
+import dao.CustomerDAOImpl;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import model.Customer;
+
 /**
  *
  * @author Ahmedov
  */
 public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
-
-    /**
-     * Creates new form JFrameEditAndCreate
-     */
+    
+    CustomerDAOImpl dao = new CustomerDAOImpl();
+    
+    private String name;
+    private String surname;
+    private String email;
+    private String gender;
+    private String nationality;
+    private String phone;
+    private String address;
+    private String date;
+    
     public JFrameCustomerEditAndCreate() {
         initComponents();
+        checkGenderRadioButton();
+        checkNationalityRadioButton();
+       
+    }
+
+    public JFrameCustomerEditAndCreate(String name, String surname, String email,
+            String gender, String nationality, String phone, String address, String date) {
+        initComponents();
+        jTextFieldFirstName.setText(name);
+        jTextFieldLastName.setText(surname);
+        jTextFielEmail.setText(email);
+        setGender(gender);
+        setNaationality(nationality);
+        jFormattedTextFieldPhoneNumber.setText(phone);
+        jComboBoxAddress.setSelectedItem(address);
+        SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
+        jDateChooserDob.setDateFormatString(date);
+        jButtonCreate.setVisible(false);
+        checkGenderRadioButton();
+        checkNationalityRadioButton();
+    }
+    
+    private void setGender(String gender){
+        if (gender.equals("Male")) {
+            jRadioButtonMale.setSelected(true);
+        }else if(gender.equals("Female")){
+            jRadioButtonFemale.setSelected(true);
+        }
+    }
+    
+    private void setNaationality(String n){
+        if (n.equals("Azerbaijani")) {
+            jRadioButtonAze.setSelected(true);
+        }else if(n.equals("Turkish")){
+            jRadioButtonTur.setSelected(true);
+        }else if(n.equals("Russian")){
+            jRadioButtonRus.setSelected(true);
+        }
     }
 
     /**
@@ -27,218 +86,224 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
-        jRadioButtonMale = new javax.swing.JRadioButton();
-        jRadioButtonFemale = new javax.swing.JRadioButton();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jFormattedTextFieldPhoneNumber1 = new javax.swing.JFormattedTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBoxAddress = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jDateChooserDob = new com.toedter.calendar.JDateChooser();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldFirstName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldLastName = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jTextFieldFatherName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFielEmail = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jRadioButtonMale = new javax.swing.JRadioButton();
+        jRadioButtonFemale = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
         jRadioButtonAze = new javax.swing.JRadioButton();
         jRadioButtonTur = new javax.swing.JRadioButton();
         jRadioButtonRus = new javax.swing.JRadioButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jFormattedTextFieldPhoneNumber = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBoxAddress = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jDateChooserDob = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonCreate = new javax.swing.JButton();
+        jButtonUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(98, 231, 214));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Gender"));
+        jPanel4.setBackground(new java.awt.Color(61, 82, 91));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jRadioButtonMale.setText("Kisi");
+        jPanel1.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Main information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel1.setForeground(new java.awt.Color(184, 215, 229));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jRadioButtonFemale.setText("Qadin");
+        jLabel2.setText("First name:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 188, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonMale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButtonFemale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButtonMale)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonFemale)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jTextFieldFirstName.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel1.add(jTextFieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Personal information"));
+        jLabel3.setText("Last name:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
+
+        jTextFieldLastName.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel1.add(jTextFieldLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 188, -1));
+
+        jLabel4.setText("E-Mail");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, -1, -1));
+
+        jTextFielEmail.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel1.add(jTextFielEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 188, -1));
+
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 220, 200));
+
+        jPanel2.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jRadioButtonMale.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonMale.setText("Male");
+        jPanel2.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
+
+        jRadioButtonFemale.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonFemale.setText("Female");
+        jPanel2.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
+
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 190, 90));
+
+        jPanel3.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nationality", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jRadioButtonAze.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonAze.setText("Azerbaijani");
+        jPanel3.add(jRadioButtonAze, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
+
+        jRadioButtonTur.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonTur.setText("Turkish");
+        jRadioButtonTur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonTurActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jRadioButtonTur, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
+
+        jRadioButtonRus.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonRus.setText("Russian");
+        jPanel3.add(jRadioButtonRus, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 76, 166, -1));
+
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 190, 120));
+
+        jPanel5.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Phone number:");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 188, -1));
 
+        jFormattedTextFieldPhoneNumber.setBackground(new java.awt.Color(101, 241, 195));
         try {
-            jFormattedTextFieldPhoneNumber1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###) ###-##-##")));
+            jFormattedTextFieldPhoneNumber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(###) ###-##-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jPanel5.add(jFormattedTextFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
 
         jLabel6.setText("Address:");
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
 
+        jComboBoxAddress.setBackground(new java.awt.Color(101, 241, 195));
         jComboBoxAddress.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baku", "Sumqayit", "Gence", "Mingechevir", "Sheki", "Qazax", "Berde" }));
+        jPanel5.add(jComboBoxAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 188, -1));
 
         jLabel7.setText("Dat of birth");
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, -1, -1));
+        jPanel5.add(jDateChooserDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 188, -1));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextFieldPhoneNumber1)
-                    .addComponent(jComboBoxAddress, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jDateChooserDob, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldPhoneNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDateChooserDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 220, 190));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Main information"));
+        jLabel1.setBackground(new java.awt.Color(101, 182, 241));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(101, 182, 241));
+        jLabel1.setText("Customer Update and Create");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
-        jLabel2.setText("First name:");
+        jButtonDelete.setBackground(new java.awt.Color(245, 12, 90));
+        jButtonDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonDelete.setText("CANCLE");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 190, 40));
 
-        jLabel3.setText("Last name:");
+        jButtonCreate.setBackground(new java.awt.Color(12, 231, 245));
+        jButtonCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCreate.setText("CREATE");
+        jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreateActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, 190, 40));
 
-        jLabel8.setText("E-Mail");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(jTextFieldFirstName)
-                    .addComponent(jTextFieldLastName)
-                    .addComponent(jTextFieldFatherName)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldFatherName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Nationality"));
-
-        jRadioButtonAze.setText("Azerbaijani");
-
-        jRadioButtonTur.setText("Turkish");
-
-        jRadioButtonRus.setText("Russian");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButtonAze, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButtonTur, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButtonRus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButtonAze)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonTur)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButtonRus)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButtonUpdate.setBackground(new java.awt.Color(12, 154, 245));
+        jButtonUpdate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonUpdate.setText("UPDATE");
+        jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUpdateActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jButtonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 190, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(51, 51, 51))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(119, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(114, 114, 114))
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
+        
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
+        String name = jTextFieldFirstName.getText();
+        String surname = jTextFieldLastName.getText();
+        String email = jTextFielEmail.getText();
+        
+        String gender = checkGenderRadioButton();
+        String nationality = checkNationalityRadioButton();
+        
+        String phone = jFormattedTextFieldPhoneNumber.getText();
+        String address = (String) jComboBoxAddress.getSelectedItem();
+        
+        SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
+        String date = dcn.format(jDateChooserDob.getDate() );
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate dateTime = LocalDate.parse(date, formatter);
+        Customer newCus = new Customer(name, surname, dateTime, gender, address, phone, email, nationality);
+        boolean result = dao.createCustomer(newCus);
+        if (result) {
+            JOptionPane.showMessageDialog(this, "Customer Create Success data...", "Create", JOptionPane.INFORMATION_MESSAGE);            
+        }else{
+            JOptionPane.showMessageDialog(this, "Customer Create Error data...", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        /* System.out.println(name);
+        System.out.println(surname);
+        System.out.println(email);
+        System.out.println(gender);
+        System.out.println(nationality);
+        System.out.println(phone);
+        System.out.println(address);
+        System.out.println(date); */
+    }//GEN-LAST:event_jButtonCreateActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        JFrameAdminController admin = new JFrameAdminController();
+        admin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jRadioButtonTurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTurActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonTurActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,26 +342,62 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCreate;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxAddress;
     private com.toedter.calendar.JDateChooser jDateChooserDob;
-    private javax.swing.JFormattedTextField jFormattedTextFieldPhoneNumber1;
+    private javax.swing.JFormattedTextField jFormattedTextFieldPhoneNumber;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButtonAze;
     private javax.swing.JRadioButton jRadioButtonFemale;
     private javax.swing.JRadioButton jRadioButtonMale;
     private javax.swing.JRadioButton jRadioButtonRus;
     private javax.swing.JRadioButton jRadioButtonTur;
-    private javax.swing.JTextField jTextFieldFatherName;
+    private javax.swing.JTextField jTextFielEmail;
     private javax.swing.JTextField jTextFieldFirstName;
     private javax.swing.JTextField jTextFieldLastName;
     // End of variables declaration//GEN-END:variables
+
+    private String checkGenderRadioButton() {
+        ButtonGroup bgGender = new ButtonGroup();
+        bgGender.add(jRadioButtonMale);
+        bgGender.add(jRadioButtonFemale);
+        
+        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
+    
+    private String checkNationalityRadioButton() {
+        ButtonGroup bgGender = new ButtonGroup();
+        bgGender.add(jRadioButtonAze);
+        bgGender.add(jRadioButtonRus);
+        bgGender.add(jRadioButtonTur);
+        
+        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
 }

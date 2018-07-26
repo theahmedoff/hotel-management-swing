@@ -291,10 +291,20 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonCustomerEdit.setBackground(new java.awt.Color(103, 224, 54));
         jButtonCustomerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonCustomerEdit.setText("Edit");
+        jButtonCustomerEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCustomerEditActionPerformed(evt);
+            }
+        });
 
         jButtonCustomerCreate.setBackground(new java.awt.Color(103, 224, 54));
         jButtonCustomerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonCustomerCreate.setText("Create");
+        jButtonCustomerCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCustomerCreateActionPerformed(evt);
+            }
+        });
 
         jTextFieldFilterCustomer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -614,6 +624,27 @@ public class JFrameAdminController extends javax.swing.JFrame {
         String filter = jTextFieldFilterCustomer.getText().toLowerCase();
         filterCustomer(filter);
     }//GEN-LAST:event_jTextFieldFilterCustomerKeyReleased
+
+    private void jButtonCustomerCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCustomerCreateActionPerformed
+        JFrameCustomerEditAndCreate create = new JFrameCustomerEditAndCreate();
+        create.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCustomerCreateActionPerformed
+
+    private void jButtonCustomerEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCustomerEditActionPerformed
+       Integer id = (Integer) jTableCustomer.getValueAt(jTableCustomer.getSelectedRow(), 0);
+       List<Customer> list = customerDAO.getAllCustomer();
+       for(Customer item : list){
+           if (item.getId() == id) {
+                JFrameCustomerEditAndCreate c = new JFrameCustomerEditAndCreate(item.getName(),
+                        item.getSurname(), item.getEmail(), item.getGender(), item.getNationality(),
+                        item.getPhone(), item.getAddress(), item.getDate().toString());
+                c.setVisible(true);
+                this.setVisible(false);
+           }
+       }
+       //System.out.println(id);
+    }//GEN-LAST:event_jButtonCustomerEditActionPerformed
 
     
     

@@ -25,6 +25,7 @@ public class jFrameLogin extends javax.swing.JFrame {
      */
     public jFrameLogin() {
         initComponents();
+        getRadioButton();
         getAll();
     }
 
@@ -198,12 +199,12 @@ public class jFrameLogin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private String getRadioButton() {
-        bg = new ButtonGroup();
-        bg.add(jRadioButtonAdmin);
-        bg.add(jRadioButtonWorker);
+        ButtonGroup sbg = new ButtonGroup();
+        sbg.add(jRadioButtonAdmin);
+        sbg.add(jRadioButtonWorker);
         
         
-        for (Enumeration<AbstractButton> buttons = bg.getElements(); buttons.hasMoreElements();) {
+        for (Enumeration<AbstractButton> buttons = sbg.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
 
             if (button.isSelected()) {
