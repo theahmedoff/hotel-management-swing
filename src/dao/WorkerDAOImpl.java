@@ -41,7 +41,6 @@ public class WorkerDAOImpl implements WorkerDAO{
                 w.setEmail(rs.getString("email"));
                 w.setPhone(rs.getString("phone"));
                 w.setAddress(rs.getString("address"));
-                w.setPosition(rs.getString("position"));
                 w.setSalary(rs.getString("salary"));
                 w.setUsername(rs.getString("username"));
                 w.setPassword(rs.getString("password"));
@@ -53,6 +52,37 @@ public class WorkerDAOImpl implements WorkerDAO{
             DBUtil.CloseAll(con, ps, rs);
         }
         return workers;
+    }
+
+    @Override
+    public boolean createWorker(Worker w) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String sql = "insert into worker(name, surname, email, gender, phone,"
+                + " salary, address, date_of_birth, username, password)"
+                + " values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        boolean result = false;
+        try{
+            con = DBUtil.getConnections();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, w.getName());
+            ps.setString(2, w.getSurname());
+            ps.setString(3, w.getEmail());
+            ps.setString(4, w.getGender());
+            ps.setString(5, w.getPhone());
+            ps.setString(6, w.getSalary());
+            ps.setString(7, w.getAddress());
+            ps.setString(8, w.getDate().toString());
+            ps.setString(9, w.getUsername());
+            ps.setString(10, w.getPassword());
+            ps.executeUpdate();
+            result = true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            DBUtil.CloseAll(con, ps, null);
+        }
+        return result;
     }
 
     @Override

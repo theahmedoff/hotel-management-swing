@@ -5,6 +5,7 @@
  */
 package view;
 
+import dao.BookingDAOImpl;
 import dao.CustomerDAOImpl;
 import dao.RoomDAOImpl;
 import dao.WorkerDAOImpl;
@@ -16,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import model.Booking;
 import model.Customer;
 import model.Room;
 import model.Worker;
@@ -27,6 +29,7 @@ import model.Worker;
 public class JFrameAdminController extends javax.swing.JFrame {
     
     RoomDAOImpl roomDAO = new RoomDAOImpl();
+    BookingDAOImpl bookingDAO = new BookingDAOImpl();
     WorkerDAOImpl workerDAO = new WorkerDAOImpl();
     CustomerDAOImpl customerDAO = new CustomerDAOImpl();
     
@@ -125,7 +128,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jButtonExit.setBackground(new java.awt.Color(56, 104, 119));
         jButtonExit.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonExit.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\exit.png")); // NOI18N
         jButtonExit.setText("      EXIT");
         jButtonExit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonExit.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -133,7 +135,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jButtonRoom.setBackground(new java.awt.Color(56, 104, 119));
         jButtonRoom.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonRoom.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\room_icon.png")); // NOI18N
         jButtonRoom.setText("   ROOM");
         jButtonRoom.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonRoom.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -146,7 +147,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jButtonBooking.setBackground(new java.awt.Color(56, 104, 119));
         jButtonBooking.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonBooking.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\booking_icon.png")); // NOI18N
         jButtonBooking.setText("   BOOKING");
         jButtonBooking.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonBooking.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -159,7 +159,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jButtonCustomer.setBackground(new java.awt.Color(56, 104, 119));
         jButtonCustomer.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonCustomer.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\customer.png")); // NOI18N
         jButtonCustomer.setText("   CUSTOMER");
         jButtonCustomer.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonCustomer.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -172,7 +171,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
         jButtonWorker.setBackground(new java.awt.Color(56, 104, 119));
         jButtonWorker.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButtonWorker.setIcon(new javax.swing.ImageIcon("C:\\Users\\Ahmedov\\Desktop\\hotel-management-swing\\hotel-management-swing\\image\\worker_icon.png")); // NOI18N
         jButtonWorker.setText("   Worker");
         jButtonWorker.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButtonWorker.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -394,6 +392,11 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonWorkerCreate.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonWorkerCreate.setText("Create");
+        jButtonWorkerCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWorkerCreateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelWorkerLayout = new javax.swing.GroupLayout(jPanelWorker);
         jPanelWorker.setLayout(jPanelWorkerLayout);
@@ -567,6 +570,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
 
     private void jButtonBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookingActionPerformed
         // TODO add your handling code here:
+        setBookingTable();
         jPanelRoom.setVisible(false);
         jPanelBooking.setVisible(true);
         jPanelCustomer.setVisible(false);
@@ -645,6 +649,12 @@ public class JFrameAdminController extends javax.swing.JFrame {
        }
        //System.out.println(id);
     }//GEN-LAST:event_jButtonCustomerEditActionPerformed
+
+    private void jButtonWorkerCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWorkerCreateActionPerformed
+        JFrameWorkerEditAndCreate w = new JFrameWorkerEditAndCreate();
+        w.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonWorkerCreateActionPerformed
 
     
     
@@ -759,6 +769,31 @@ public class JFrameAdminController extends javax.swing.JFrame {
         
         jTableRoom.setModel(dtm);
     }
+    
+    private void setBookingTable(){
+        List<Booking> bookings = bookingDAO.getAllBoking();
+        
+        DefaultTableModel dtmBooking = new DefaultTableModel();
+        
+        dtmBooking.addColumn("ID");
+        dtmBooking.addColumn("Check In");
+        dtmBooking.addColumn("Check Out");
+        dtmBooking.addColumn("Room Property");
+        dtmBooking.addColumn("Room Type");
+        dtmBooking.addColumn("Room Number");
+        dtmBooking.addColumn("Customer Name");
+        dtmBooking.addColumn("Customer Surname");
+        
+        for(Booking item : bookings){
+            dtmBooking.addRow(new Object[]{item.getId(), item.getCheckIN(), item.getCheckOUT(),
+                    item.getRoom().getProperty(), item.getRoom().getType(), item.getRoom().getNumber(),
+                    item.getCustomer().getName(), item.getCustomer().getSurname()});
+            System.out.println(item);
+        }
+        
+        jTableBooking.setModel(dtmBooking);
+    
+    }
 
     private void setWorkerTable() {
 
@@ -774,7 +809,6 @@ public class JFrameAdminController extends javax.swing.JFrame {
         dtm.addColumn("E-Mail");
         dtm.addColumn("Phone");
         dtm.addColumn("Address");
-        dtm.addColumn("Posotion");
         dtm.addColumn("Salary");
         dtm.addColumn("Username");
         dtm.addColumn("Password");
@@ -782,7 +816,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
         for(Worker item : workers){
             dtm.addRow(new Object[]{item.getId(), item.getName(), item.getSurname(),
                     item.getGender(), item.getDate(), item.getEmail(), item.getPhone(),
-                    item.getAddress(), item.getPosition(), item.getSalary(),
+                    item.getAddress(), item.getSalary(),
                     item.getUsername(), item.getPassword()});
             //System.out.println(item);
         }

@@ -28,7 +28,7 @@ public class DBUtil {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/hotel";
             String username = "root";
-            String password = "aa121212";
+            String password = "";
             con = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class DBUtil {
     }
     
     public static void main(String[] args) {
-        
+        getConnections();
     }
     
 }

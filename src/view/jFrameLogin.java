@@ -144,7 +144,7 @@ public class jFrameLogin extends javax.swing.JFrame {
         }
         if(rb.equals("Worker")){
             Worker worker = dao.checkLoginWorker(username, password);
-            String data = worker.getName() + " " + worker.getSurname() + "\n" + worker.getPosition();
+            String data = worker.getName() + " " + worker.getSurname();
             JOptionPane.showMessageDialog(this, data, "Welcome Worker", JOptionPane.INFORMATION_MESSAGE);
         }else if(result != true){
             JOptionPane.showMessageDialog(this, "Istifadeci login parol sefdi!", "Error", JOptionPane.WARNING_MESSAGE);

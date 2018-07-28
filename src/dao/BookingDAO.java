@@ -6,15 +6,12 @@
 package dao;
 
 import java.util.List;
-import model.Worker;
+import model.Booking;
 
 /**
  *
- * @author Ahmedov
+ * @author Ahme_vn75
  */
-public interface WorkerDAO {
-    
-    List<Worker> getAllWorker();
-    boolean removeWorkerTableRow(int id);
-    boolean createWorker(Worker w);
+public interface BookingDAO {
+     List<Booking> getAllBoking();
 }

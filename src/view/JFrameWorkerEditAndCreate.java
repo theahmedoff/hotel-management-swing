@@ -5,76 +5,27 @@
  */
 package view;
 
-import dao.CustomerDAOImpl;
-import java.text.DateFormat;
+import dao.WorkerDAOImpl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Enumeration;
-import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
-import model.Customer;
+import model.Worker;
 
 /**
  *
- * @author Ahmedov
+ * @author Ahme_vn75
  */
-public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
-    
-    CustomerDAOImpl dao = new CustomerDAOImpl();
-    
-    private String name;
-    private String surname;
-    private String email;
-    private String gender;
-    private String nationality;
-    private String phone;
-    private String address;
-    private String date;
-    
-    public JFrameCustomerEditAndCreate() {
+public class JFrameWorkerEditAndCreate extends javax.swing.JFrame {
+    WorkerDAOImpl dao = new WorkerDAOImpl();
+    /**
+     * Creates new form JFrameWorkerEditAndCreate
+     */
+    public JFrameWorkerEditAndCreate() {
         initComponents();
-        checkGenderRadioButton();
-        checkNationalityRadioButton();
-       
-    }
-
-    public JFrameCustomerEditAndCreate(String name, String surname, String email,
-            String gender, String nationality, String phone, String address, String date) {
-        initComponents();
-        jTextFieldFirstName.setText(name);
-        jTextFieldLastName.setText(surname);
-        jTextFielEmail.setText(email);
-        setGender(gender);
-        setNaationality(nationality);
-        jFormattedTextFieldPhoneNumber.setText(phone);
-        jComboBoxAddress.setSelectedItem(address);
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
-        jDateChooserDob.setDateFormatString(date);
-        jButtonCreate.setVisible(false);
-        checkGenderRadioButton();
-        checkNationalityRadioButton();
-    }
-    
-    private void setGender(String gender){
-        if (gender.equals("Male")) {
-            jRadioButtonMale.setSelected(true);
-        }else if(gender.equals("Female")){
-            jRadioButtonFemale.setSelected(true);
-        }
-    }
-    
-    private void setNaationality(String n){
-        if (n.equals("Azerbaijani")) {
-            jRadioButtonAze.setSelected(true);
-        }else if(n.equals("Turkish")){
-            jRadioButtonTur.setSelected(true);
-        }else if(n.equals("Russian")){
-            jRadioButtonRus.setSelected(true);
-        }
     }
 
     /**
@@ -97,10 +48,6 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jRadioButtonMale = new javax.swing.JRadioButton();
         jRadioButtonFemale = new javax.swing.JRadioButton();
-        jPanel3 = new javax.swing.JPanel();
-        jRadioButtonAze = new javax.swing.JRadioButton();
-        jRadioButtonTur = new javax.swing.JRadioButton();
-        jRadioButtonRus = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jFormattedTextFieldPhoneNumber = new javax.swing.JFormattedTextField();
@@ -108,13 +55,19 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
         jComboBoxAddress = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jDateChooserDob = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonDelete = new javax.swing.JButton();
+        jTextFieldSalary = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabelWorkerTitle = new javax.swing.JLabel();
+        jButtonCancel = new javax.swing.JButton();
         jButtonCreate = new javax.swing.JButton();
         jButtonUpdate = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldUsername = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextFieldPassword = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(98, 231, 214));
 
         jPanel4.setBackground(new java.awt.Color(61, 82, 91));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -125,7 +78,7 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("First name:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 188, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 60, -1));
 
         jTextFieldFirstName.setBackground(new java.awt.Color(101, 241, 195));
         jPanel1.add(jTextFieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
@@ -150,43 +103,20 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
 
         jRadioButtonMale.setBackground(new java.awt.Color(101, 241, 195));
         jRadioButtonMale.setText("Male");
-        jPanel2.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
+        jPanel2.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 180, -1));
 
         jRadioButtonFemale.setBackground(new java.awt.Color(101, 241, 195));
         jRadioButtonFemale.setText("Female");
-        jPanel2.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
+        jPanel2.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 180, -1));
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 190, 90));
-
-        jPanel3.setBackground(new java.awt.Color(148, 215, 80));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nationality", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jRadioButtonAze.setBackground(new java.awt.Color(101, 241, 195));
-        jRadioButtonAze.setText("Azerbaijani");
-        jPanel3.add(jRadioButtonAze, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
-
-        jRadioButtonTur.setBackground(new java.awt.Color(101, 241, 195));
-        jRadioButtonTur.setText("Turkish");
-        jRadioButtonTur.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonTurActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jRadioButtonTur, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
-
-        jRadioButtonRus.setBackground(new java.awt.Color(101, 241, 195));
-        jRadioButtonRus.setText("Russian");
-        jPanel3.add(jRadioButtonRus, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 76, 166, -1));
-
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 190, 120));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, 220, 90));
 
         jPanel5.setBackground(new java.awt.Color(148, 215, 80));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setText("Phone number:");
-        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 188, -1));
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 80, -1));
 
         jFormattedTextFieldPhoneNumber.setBackground(new java.awt.Color(101, 241, 195));
         try {
@@ -194,36 +124,42 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel5.add(jFormattedTextFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
+        jPanel5.add(jFormattedTextFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, -1));
 
         jLabel6.setText("Address:");
-        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
+        jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jComboBoxAddress.setBackground(new java.awt.Color(101, 241, 195));
         jComboBoxAddress.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baku", "Sumqayit", "Gence", "Mingechevir", "Sheki", "Qazax", "Berde" }));
-        jPanel5.add(jComboBoxAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 188, -1));
+        jPanel5.add(jComboBoxAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 180, -1));
 
         jLabel7.setText("Dat of birth");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, -1, -1));
-        jPanel5.add(jDateChooserDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 188, -1));
+        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+        jPanel5.add(jDateChooserDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 180, -1));
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 220, 190));
+        jTextFieldSalary.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel5.add(jTextFieldSalary, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 180, -1));
 
-        jLabel1.setBackground(new java.awt.Color(101, 182, 241));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(101, 182, 241));
-        jLabel1.setText("Customer Update and Create");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+        jLabel11.setText("Salary");
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 40, -1));
 
-        jButtonDelete.setBackground(new java.awt.Color(245, 12, 90));
-        jButtonDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonDelete.setText("CANCEL");
-        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 220, 250));
+
+        jLabelWorkerTitle.setBackground(new java.awt.Color(101, 182, 241));
+        jLabelWorkerTitle.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        jLabelWorkerTitle.setForeground(new java.awt.Color(101, 182, 241));
+        jLabelWorkerTitle.setText("Worker Create");
+        jPanel4.add(jLabelWorkerTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
+
+        jButtonCancel.setBackground(new java.awt.Color(245, 12, 90));
+        jButtonCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCancel.setText("CANCEL");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteActionPerformed(evt);
+                jButtonCancelActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 470, 190, 40));
+        jPanel4.add(jButtonCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 140, 40));
 
         jButtonCreate.setBackground(new java.awt.Color(12, 231, 245));
         jButtonCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -233,7 +169,7 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
                 jButtonCreateActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, 190, 40));
+        jPanel4.add(jButtonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 140, 40));
 
         jButtonUpdate.setBackground(new java.awt.Color(12, 154, 245));
         jButtonUpdate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -243,68 +179,100 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
                 jButtonUpdateActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 190, 40));
+        jPanel4.add(jButtonUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 490, 140, 40));
+
+        jPanel6.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Main information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel6.setForeground(new java.awt.Color(184, 215, 229));
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setText("Username");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 50, -1));
+
+        jTextFieldUsername.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel6.add(jTextFieldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 180, -1));
+
+        jLabel10.setText("Password");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
+
+        jTextFieldPassword.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel6.add(jTextFieldPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 180, -1));
+
+        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 220, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-        
-    }//GEN-LAST:event_jButtonUpdateActionPerformed
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        JFrameAdminController admin = new JFrameAdminController();
+        admin.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
         String name = jTextFieldFirstName.getText();
         String surname = jTextFieldLastName.getText();
         String email = jTextFielEmail.getText();
-        
         String gender = checkGenderRadioButton();
-        String nationality = checkNationalityRadioButton();
-        
         String phone = jFormattedTextFieldPhoneNumber.getText();
+        String salary = jTextFieldSalary.getText();
         String address = (String) jComboBoxAddress.getSelectedItem();
-        
         SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
-        String date = dcn.format(jDateChooserDob.getDate() );
+        String date = dcn.format(jDateChooserDob.getDate());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate dateTime = LocalDate.parse(date, formatter);
-        Customer newCus = new Customer(name, surname, dateTime, gender, address, phone, email, nationality);
-        boolean result = dao.createCustomer(newCus);
-        if (result) {
+        LocalDate dates = LocalDate.parse(date, formatter);
+        String username = jTextFieldUsername.getText();
+        String password = jTextFieldPassword.getText();
+        
+        Worker w = new Worker(name, surname, gender, dates, email, phone, address, salary, username, password);
+        boolean result = dao.createWorker(w);
+        if(result){
             JOptionPane.showMessageDialog(this, "Customer Create Success data...", "Create", JOptionPane.INFORMATION_MESSAGE);            
         }else{
             JOptionPane.showMessageDialog(this, "Customer Create Error data...", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        /* System.out.println(name);
+        /*System.out.println(name);
         System.out.println(surname);
         System.out.println(email);
         System.out.println(gender);
-        System.out.println(nationality);
+        System.out.println(salary);
         System.out.println(phone);
         System.out.println(address);
-        System.out.println(date); */
+        System.out.println(date);
+        System.out.println(username);
+        System.out.println(password);*/
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
-    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        JFrameAdminController admin = new JFrameAdminController();
-        admin.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButtonDeleteActionPerformed
+    private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
 
-    private void jRadioButtonTurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTurActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonTurActionPerformed
+    }//GEN-LAST:event_jButtonUpdateActionPerformed
 
+    private String checkGenderRadioButton() {
+        ButtonGroup bgGender = new ButtonGroup();
+        bgGender.add(jRadioButtonMale);
+        bgGender.add(jRadioButtonFemale);
+        
+        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -322,82 +290,53 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameCustomerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameWorkerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameCustomerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameWorkerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameCustomerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameWorkerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameCustomerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFrameWorkerEditAndCreate.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameCustomerEditAndCreate().setVisible(true);
+                new JFrameWorkerEditAndCreate().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonCreate;
-    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JComboBox<String> jComboBoxAddress;
     private com.toedter.calendar.JDateChooser jDateChooserDob;
     private javax.swing.JFormattedTextField jFormattedTextFieldPhoneNumber;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelWorkerTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButtonAze;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButtonFemale;
     private javax.swing.JRadioButton jRadioButtonMale;
-    private javax.swing.JRadioButton jRadioButtonRus;
-    private javax.swing.JRadioButton jRadioButtonTur;
     private javax.swing.JTextField jTextFielEmail;
     private javax.swing.JTextField jTextFieldFirstName;
     private javax.swing.JTextField jTextFieldLastName;
+    private javax.swing.JTextField jTextFieldPassword;
+    private javax.swing.JTextField jTextFieldSalary;
+    private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
-
-    private String checkGenderRadioButton() {
-        ButtonGroup bgGender = new ButtonGroup();
-        bgGender.add(jRadioButtonMale);
-        bgGender.add(jRadioButtonFemale);
-        
-        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-        return null;
-    }
-    
-    private String checkNationalityRadioButton() {
-        ButtonGroup bgGender = new ButtonGroup();
-        bgGender.add(jRadioButtonAze);
-        bgGender.add(jRadioButtonRus);
-        bgGender.add(jRadioButtonTur);
-        
-        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
-            AbstractButton button = buttons.nextElement();
-
-            if (button.isSelected()) {
-                return button.getText();
-            }
-        }
-        return null;
-    }
 }

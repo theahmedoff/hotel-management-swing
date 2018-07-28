@@ -108,6 +108,11 @@ public class Customer {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", date=" + date + ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", email=" + email + ", nationality=" + nationality + '}';
+    }
     
     
 }

@@ -20,7 +20,6 @@ public class Worker {
     private String email;
     private String phone;
     private String address;
-    private String position;
     private String salary;
     private String username;
     private String password;
@@ -28,8 +27,8 @@ public class Worker {
     public Worker() {
     }
 
-    public Worker(int id, String name, String surname, String gender, LocalDate date, String email, String phone, String address, String position, String salary, String username, String password) {
-        this.id = id;
+    public Worker(String name, String surname, String gender, LocalDate date,
+            String email, String phone, String address, String salary, String username, String password) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -37,12 +36,10 @@ public class Worker {
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.position = position;
         this.salary = salary;
         this.username = username;
         this.password = password;
     }
-
     public int getId() {
         return id;
     }
@@ -107,14 +104,6 @@ public class Worker {
         this.address = address;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public String getSalary() {
         return salary;
     }
@@ -139,7 +128,4 @@ public class Worker {
         this.password = password;
     }
 
-    
-    
-    
 }

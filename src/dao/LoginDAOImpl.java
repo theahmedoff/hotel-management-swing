@@ -71,7 +71,6 @@ public class LoginDAOImpl implements LoginDAO{
                 worker.setDate(rs.getDate("date_of_birth").toLocalDate());
                 worker.setPhone(rs.getString("phone"));
                 worker.setEmail(rs.getString("email"));
-                worker.setPosition(rs.getString("position"));
             }
         }catch(SQLException e){
             e.printStackTrace();
