@@ -20,6 +20,7 @@ import model.Worker;
  */
 public class jFrameLogin extends javax.swing.JFrame {
     LoginDAOImpl dao = new LoginDAOImpl();
+    
     /**
      * Creates new form jFrameLogin
      */
@@ -135,9 +136,9 @@ public class jFrameLogin extends javax.swing.JFrame {
             System.out.println(admin);
             String data = admin.getName() + " " + admin.getSurname() + "\n" + admin.getLastLoginDate();
             JOptionPane.showMessageDialog(this, data, "Welcome Admin", JOptionPane.INFORMATION_MESSAGE);
-            JFrameMain main = new JFrameMain();
-            main.setVisible(true);
-            this.setVisible(false);
+            //JFrameAdmin
+            //admin.setVisible(true);
+            //this.setVisible(false);
             result = true;
         }else if(result != true){
             JOptionPane.showMessageDialog(this, "Istifadeci login parol sefdi!", "Error", JOptionPane.WARNING_MESSAGE);

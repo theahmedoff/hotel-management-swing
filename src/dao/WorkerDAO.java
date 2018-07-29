@@ -17,4 +17,5 @@ public interface WorkerDAO {
     List<Worker> getAllWorker();
     boolean removeWorkerTableRow(int id);
     boolean createWorker(Worker w);
+    boolean updateWorker(int id);
 }

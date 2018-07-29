@@ -9,6 +9,7 @@ import dao.CustomerDAOImpl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Enumeration;
@@ -17,6 +18,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import model.Customer;
+import util.DateUtils;
 
 /**
  *
@@ -43,7 +45,7 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
     }
 
     public JFrameCustomerEditAndCreate(String name, String surname, String email,
-            String gender, String nationality, String phone, String address, String date) {
+            String gender, String nationality, String phone, String address, LocalDate date) {
         initComponents();
         jTextFieldFirstName.setText(name);
         jTextFieldLastName.setText(surname);
@@ -52,8 +54,7 @@ public class JFrameCustomerEditAndCreate extends javax.swing.JFrame {
         setNaationality(nationality);
         jFormattedTextFieldPhoneNumber.setText(phone);
         jComboBoxAddress.setSelectedItem(address);
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
-        jDateChooserDob.setDateFormatString(date);
+        jDateChooserDob.setDate(DateUtils.asDate(date));
         jButtonCreate.setVisible(false);
         checkGenderRadioButton();
         checkNationalityRadioButton();

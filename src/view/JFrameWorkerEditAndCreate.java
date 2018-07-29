@@ -5,15 +5,19 @@
  */
 package view;
 
+import com.toedter.calendar.DateUtil;
 import dao.WorkerDAOImpl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import model.Worker;
+import util.DateUtils;
 
 /**
  *
@@ -21,13 +25,36 @@ import model.Worker;
  */
 public class JFrameWorkerEditAndCreate extends javax.swing.JFrame {
     WorkerDAOImpl dao = new WorkerDAOImpl();
-    /**
-     * Creates new form JFrameWorkerEditAndCreate
-     */
+    
+    
     public JFrameWorkerEditAndCreate() {
         initComponents();
     }
 
+    public JFrameWorkerEditAndCreate(String name, String surname, String gender, LocalDate date,
+            String email, String phone, String address, String salary, String username, String password) {
+        initComponents();
+        jTextFieldFirstName.setText(name);
+        jTextFieldLastName.setText(surname);
+        jTextFielEmail.setText(email);
+        setGender(gender);
+        jFormattedTextFieldPhoneNumber.setText(phone);
+        jTextFieldSalary.setText(salary);
+        jComboBoxAddress.setSelectedItem(address);
+        jDateChooserDob.setDate(DateUtils.asDate(date));
+        jTextFieldUsername.setText(username);
+        jTextFieldPassword.setText(password);
+        jLabelWorkerTitle.setText("Worker Edit");
+        jButtonCreate.setEnabled(false);
+    }
+    
+    private void setGender(String gender){
+        if (gender.equals("Male")) {
+            jRadioButtonMale.setSelected(true);
+        }else if(gender.equals("Female")){
+            jRadioButtonFemale.setSelected(false);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,7 +282,7 @@ public class JFrameWorkerEditAndCreate extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCreateActionPerformed
 
     private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
-
+        
     }//GEN-LAST:event_jButtonUpdateActionPerformed
 
     private String checkGenderRadioButton() {

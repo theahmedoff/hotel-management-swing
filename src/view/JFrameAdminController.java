@@ -388,6 +388,11 @@ public class JFrameAdminController extends javax.swing.JFrame {
         jButtonWorkerEdit.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerEdit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonWorkerEdit.setText("Edit");
+        jButtonWorkerEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonWorkerEditActionPerformed(evt);
+            }
+        });
 
         jButtonWorkerCreate.setBackground(new java.awt.Color(216, 224, 54));
         jButtonWorkerCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -642,7 +647,7 @@ public class JFrameAdminController extends javax.swing.JFrame {
            if (item.getId() == id) {
                 JFrameCustomerEditAndCreate c = new JFrameCustomerEditAndCreate(item.getName(),
                         item.getSurname(), item.getEmail(), item.getGender(), item.getNationality(),
-                        item.getPhone(), item.getAddress(), item.getDate().toString());
+                        item.getPhone(), item.getAddress(), item.getDate());
                 c.setVisible(true);
                 this.setVisible(false);
            }
@@ -656,11 +661,23 @@ public class JFrameAdminController extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonWorkerCreateActionPerformed
 
+    private void jButtonWorkerEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWorkerEditActionPerformed
+        Integer id = (Integer) jTableWorker.getValueAt(jTableWorker.getSelectedRow(), 0);
+        List<Worker> list = workerDAO.getAllWorker();
+        for(Worker item : list){
+            if (item.getId() == id) {
+                JFrameWorkerEditAndCreate w = new JFrameWorkerEditAndCreate(item.getName(), item.getSurname(),
+                        item.getGender(), item.getDate(), item.getEmail(), item.getPhone(), item.getAddress(),
+                        item.getSalary(), item.getUsername(), item.getPassword());
+                w.setVisible(true);
+                this.setVisible(false);
+            }
+        }
+    }//GEN-LAST:event_jButtonWorkerEditActionPerformed
+
     
     
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

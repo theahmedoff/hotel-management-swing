@@ -104,5 +104,26 @@ public class WorkerDAOImpl implements WorkerDAO{
         }
         return result;
     }
+
+    @Override
+    public boolean updateWorker(int id) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String sql = "update worker set name = ?, surname = ?, gender = ?, phone = ?,"
+                + "salary = ?, address = ?, date_of_birth, username = ?, password = ?  where id = ?";
+        boolean result = false;
+        try{
+            con = DBUtil.getConnections();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            result = true;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally{
+            DBUtil.CloseAll(con, ps, null);
+        }
+        return result;
+    }
     
 }
