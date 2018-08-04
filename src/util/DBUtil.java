@@ -55,6 +55,18 @@ public class DBUtil {
         }
     }
     
+    public static void closeAll(AutoCloseable... acs){
+        for (AutoCloseable ac : acs) {
+            if (ac != null) {
+                try {
+                    ac.close();
+                } catch (Exception ex) {
+                    Logger.getLogger(DBUtil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         getConnections();
     }

@@ -67,7 +67,7 @@ public class BookingDAOImpl implements BookingDAO{
         }catch (SQLException e) {
             e.printStackTrace();
         }finally{
-            DBUtil.CloseAll(con, ps, rs);
+            DBUtil.closeAll(con, ps, rs);
         }
         return list;
     }
