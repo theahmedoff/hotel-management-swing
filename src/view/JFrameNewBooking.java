@@ -5,12 +5,25 @@
  */
 package view;
 
+import dao.BookingDAOImpl;
 import dao.CustomerDAOImpl;
+import dao.RoomDAOImpl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import model.Booking;
 import model.Customer;
+import model.Room;
+import util.DateUtils;
 
 /**
  *
@@ -18,10 +31,16 @@ import model.Customer;
  */
 public class JFrameNewBooking extends javax.swing.JFrame {
     
-    CustomerDAOImpl cusDAO = new CustomerDAOImpl();
+    BookingDAOImpl bookingDAO = new BookingDAOImpl();
+    RoomDAOImpl roomDAO = new RoomDAOImpl();
    
+    
+    
     public JFrameNewBooking() {
         initComponents();
+        setRoomTable();
+        checkGenderRadioButton();
+        checkNationalityRadioButton();
     }
 
     /**
@@ -44,9 +63,9 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         jTextFielEmail = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jDateChooserDob1 = new com.toedter.calendar.JDateChooser();
+        jDateCheckIn = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jDateChooserDob2 = new com.toedter.calendar.JDateChooser();
+        jDateCheckOut = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jRadioButtonAze = new javax.swing.JRadioButton();
         jRadioButtonTur = new javax.swing.JRadioButton();
@@ -58,11 +77,15 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         jComboBoxAddress = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jDateChooserDob = new com.toedter.calendar.JDateChooser();
-        jLabel1 = new javax.swing.JLabel();
-        jButtonCreate = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
-        jRadioButtonMale1 = new javax.swing.JRadioButton();
-        jRadioButtonFemale1 = new javax.swing.JRadioButton();
+        jPanel9 = new javax.swing.JPanel();
+        jRadioButtonMale = new javax.swing.JRadioButton();
+        jRadioButtonFemale = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableRoom = new javax.swing.JTable();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextFieldTotalCoast2 = new javax.swing.JTextField();
+        jButtonCreateBooking = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 0, 102));
@@ -81,21 +104,21 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 28, 188, -1));
 
         jTextFieldFirstName.setBackground(new java.awt.Color(101, 241, 195));
-        jPanel1.add(jTextFieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
+        jPanel1.add(jTextFieldFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 180, -1));
 
         jLabel3.setText("Last name:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
 
         jTextFieldLastName.setBackground(new java.awt.Color(101, 241, 195));
-        jPanel1.add(jTextFieldLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 188, -1));
+        jPanel1.add(jTextFieldLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 180, -1));
 
         jLabel4.setText("E-Mail");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, -1, -1));
 
         jTextFielEmail.setBackground(new java.awt.Color(101, 241, 195));
-        jPanel1.add(jTextFielEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 188, -1));
+        jPanel1.add(jTextFielEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 180, -1));
 
-        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 220, 200));
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 210, 200));
 
         jPanel2.setBackground(new java.awt.Color(148, 215, 80));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
@@ -103,13 +126,13 @@ public class JFrameNewBooking extends javax.swing.JFrame {
 
         jLabel8.setText("Check In");
         jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-        jPanel2.add(jDateChooserDob1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 160, -1));
+        jPanel2.add(jDateCheckIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 160, -1));
 
         jLabel9.setText("Check Out");
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, -1, -1));
-        jPanel2.add(jDateChooserDob2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 160, -1));
+        jPanel2.add(jDateCheckOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 160, -1));
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 190, 160));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 190, 140));
 
         jPanel3.setBackground(new java.awt.Color(148, 215, 80));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nationality", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
@@ -132,7 +155,7 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         jRadioButtonRus.setText("Russian");
         jPanel3.add(jRadioButtonRus, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 76, 166, -1));
 
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 190, 120));
+        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 210, 120));
 
         jPanel5.setBackground(new java.awt.Color(148, 215, 80));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Personal information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
@@ -147,50 +170,72 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jPanel5.add(jFormattedTextFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 188, -1));
+        jPanel5.add(jFormattedTextFieldPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 48, 170, -1));
 
         jLabel6.setText("Address:");
         jPanel5.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 79, -1, -1));
 
         jComboBoxAddress.setBackground(new java.awt.Color(101, 241, 195));
         jComboBoxAddress.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baku", "Sumqayit", "Gence", "Mingechevir", "Sheki", "Qazax", "Berde" }));
-        jPanel5.add(jComboBoxAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 188, -1));
+        jPanel5.add(jComboBoxAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 99, 170, -1));
 
         jLabel7.setText("Dat of birth");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 130, -1, -1));
-        jPanel5.add(jDateChooserDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 188, -1));
+        jPanel5.add(jDateChooserDob, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 150, 170, -1));
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 320, 220, 190));
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 200, 190));
 
-        jLabel1.setBackground(new java.awt.Color(101, 182, 241));
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(101, 182, 241));
-        jLabel1.setText("Customer Create");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        jPanel9.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButtonCreate.setBackground(new java.awt.Color(12, 231, 245));
-        jButtonCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonCreate.setText("CREATE");
-        jButtonCreate.addActionListener(new java.awt.event.ActionListener() {
+        jRadioButtonMale.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonMale.setText("Male");
+        jPanel9.add(jRadioButtonMale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
+
+        jRadioButtonFemale.setBackground(new java.awt.Color(101, 241, 195));
+        jRadioButtonFemale.setText("Female");
+        jPanel9.add(jRadioButtonFemale, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
+
+        jPanel4.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 190, 90));
+
+        jTableRoom.setBackground(new java.awt.Color(230, 236, 239));
+        jTableRoom.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableRoom);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 100, 440, 270));
+
+        jPanel11.setBackground(new java.awt.Color(148, 215, 80));
+        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Total Cost", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setText("Total Cost");
+        jPanel11.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        jTextFieldTotalCoast2.setBackground(new java.awt.Color(101, 241, 195));
+        jPanel11.add(jTextFieldTotalCoast2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 150, -1));
+
+        jPanel4.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 190, 90));
+
+        jButtonCreateBooking.setBackground(new java.awt.Color(12, 231, 245));
+        jButtonCreateBooking.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonCreateBooking.setText("Create Booking");
+        jButtonCreateBooking.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCreateActionPerformed(evt);
+                jButtonCreateBookingActionPerformed(evt);
             }
         });
-        jPanel4.add(jButtonCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 380, 190, 40));
-
-        jPanel7.setBackground(new java.awt.Color(148, 215, 80));
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gender", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12), new java.awt.Color(220, 41, 65))); // NOI18N
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jRadioButtonMale1.setBackground(new java.awt.Color(101, 241, 195));
-        jRadioButtonMale1.setText("Male");
-        jPanel7.add(jRadioButtonMale1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 24, 166, -1));
-
-        jRadioButtonFemale1.setBackground(new java.awt.Color(101, 241, 195));
-        jRadioButtonFemale1.setText("Female");
-        jPanel7.add(jRadioButtonFemale1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 50, 166, -1));
-
-        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, 190, 90));
+        jPanel4.add(jButtonCreateBooking, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 480, 250, 60));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -204,8 +249,8 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(67, 67, 67))
         );
 
@@ -227,7 +272,7 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonTurActionPerformed
 
-    private void jButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateActionPerformed
+    private void jButtonCreateBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreateBookingActionPerformed
         String name = jTextFieldFirstName.getText();
         String surname = jTextFieldLastName.getText();
         String email = jTextFielEmail.getText();
@@ -238,26 +283,42 @@ public class JFrameNewBooking extends javax.swing.JFrame {
         String phone = jFormattedTextFieldPhoneNumber.getText();
         String address = (String) jComboBoxAddress.getSelectedItem();
 
-        SimpleDateFormat dcn = new SimpleDateFormat("yyyy/MM/dd");
-        String date = dcn.format(jDateChooserDob.getDate() );
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate dateTime = LocalDate.parse(date, formatter);
+        LocalDate dateTime = DateUtils.asLocalDate(jDateChooserDob.getDate());
         Customer newCus = new Customer(name, surname, dateTime, gender, address, phone, email, nationality);
-        boolean result = cusDAO.createCustomer(newCus);
+        
+        LocalDate checkIn = DateUtils.asLocalDate(jDateCheckIn.getDate());
+        
+        LocalDate checkOut = DateUtils.asLocalDate(jDateCheckOut.getDate());
+        
+        Integer id = (Integer) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 0);
+        Room r = new Room();
+        r.setId(id);
+        Booking booking = new Booking(checkIn, checkOut, r, newCus);
+        
+        
+       /* boolean result = bookingDAO.createBooking(booking);
         if (result) {
-            JOptionPane.showMessageDialog(this, "Customer Create Success data...", "Create", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Booking Create Success data...", "Create", JOptionPane.INFORMATION_MESSAGE);
+            JFrameReseptionPanel rp = new JFrameReseptionPanel();
+            rp.setVisible(true);
+            this.setVisible(false);
         }else{
-            JOptionPane.showMessageDialog(this, "Customer Create Error data...", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        /* System.out.println(name);
+            JOptionPane.showMessageDialog(this, "Booking Create Error data...", "Error", JOptionPane.ERROR_MESSAGE);
+        }*/
+       
+        System.out.println(name);
         System.out.println(surname);
         System.out.println(email);
         System.out.println(gender);
         System.out.println(nationality);
         System.out.println(phone);
         System.out.println(address);
-        System.out.println(date); */
-    }//GEN-LAST:event_jButtonCreateActionPerformed
+        //System.out.println(date);
+        System.out.println(checkIn);
+        System.out.println(checkOut);
+        System.out.println(id);
+        
+    }//GEN-LAST:event_jButtonCreateBookingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,13 +356,13 @@ public class JFrameNewBooking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCreate;
+    private javax.swing.JButton jButtonCreateBooking;
     private javax.swing.JComboBox<String> jComboBoxAddress;
+    private com.toedter.calendar.JDateChooser jDateCheckIn;
+    private com.toedter.calendar.JDateChooser jDateCheckOut;
     private com.toedter.calendar.JDateChooser jDateChooserDob;
-    private com.toedter.calendar.JDateChooser jDateChooserDob1;
-    private com.toedter.calendar.JDateChooser jDateChooserDob2;
     private javax.swing.JFormattedTextField jFormattedTextFieldPhoneNumber;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -311,27 +372,112 @@ public class JFrameNewBooking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JRadioButton jRadioButtonAze;
-    private javax.swing.JRadioButton jRadioButtonFemale1;
-    private javax.swing.JRadioButton jRadioButtonMale1;
+    private javax.swing.JRadioButton jRadioButtonFemale;
+    private javax.swing.JRadioButton jRadioButtonMale;
     private javax.swing.JRadioButton jRadioButtonRus;
     private javax.swing.JRadioButton jRadioButtonTur;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableRoom;
     private javax.swing.JTextField jTextFielEmail;
     private javax.swing.JTextField jTextFieldFirstName;
     private javax.swing.JTextField jTextFieldLastName;
+    private javax.swing.JTextField jTextFieldTotalCoast2;
     // End of variables declaration//GEN-END:variables
 
     private String checkGenderRadioButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ButtonGroup bgGender = new ButtonGroup();
+        bgGender.add(jRadioButtonMale);
+        bgGender.add(jRadioButtonFemale);
+        
+        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
     }
 
     private String checkNationalityRadioButton() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ButtonGroup bgGender = new ButtonGroup();
+        bgGender.add(jRadioButtonAze);
+        bgGender.add(jRadioButtonRus);
+        bgGender.add(jRadioButtonTur);
+        
+        for (Enumeration<AbstractButton> buttons = bgGender.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
     }
+
+    private void setRoomTable() {
+        List<Room> rooms = roomDAO.getAllRoom();
+        
+        DefaultTableModel dtm = new DefaultTableModel(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        
+        dtm.addColumn("ID");
+        dtm.addColumn("Property");
+        dtm.addColumn("Type");
+        dtm.addColumn("View");
+        dtm.addColumn("Adult no");
+        dtm.addColumn("Child no");
+        dtm.addColumn("Number");
+        dtm.addColumn("Status");
+        
+        for(Room item : rooms){
+            dtm.addRow(new Object[]{item.getId(), item.getProperty(), item.getType(), item.getView(), 
+            item.getAdultNo(), item.getChildNo(), item.getNumber(), item.isStatus()});
+        }
+        
+        jTableRoom.setModel(dtm);
+    }
+    
+    /*private void selectedRoomTable() {
+        jTableRoom.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                //jTextCustomerId.setText();
+            }
+            
+        });
+    }*/
+
+    private Room getSelectedRoomId() {
+        Room room = null;
+        jTableRoom.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Integer id = (Integer) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 0);
+                String property = (String) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 1);
+                String type = (String) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 2);
+                String view = (String) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 4);
+                int adultNo = (int) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 5);
+                int childNo = (int) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 6);
+                int number = (int) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 7);
+                boolean status = (boolean) jTableRoom.getValueAt(jTableRoom.getSelectedRow(), 8);
+                //room = new Room(id, property, type, view, adultNo, childNo, number, status);
+            }
+        });
+        return room;
+    }
+
+    
 }

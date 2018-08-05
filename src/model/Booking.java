@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -14,21 +15,19 @@ import java.time.LocalTime;
  */
 public class Booking {
     private int id;
-    private LocalDateTime checkIN;
-    private LocalDateTime checkOUT;
+    private LocalDate checkIN;
+    private LocalDate checkOUT;
     private Room room;
     private Customer customer;
-    private boolean status;
 
     public Booking() {
     }
 
-    public Booking(LocalDateTime checkIN, LocalDateTime checkOUT, Room room, Customer customer, boolean status) {
+    public Booking(LocalDate checkIN, LocalDate checkOUT, Room room, Customer customer) {
         this.checkIN = checkIN;
         this.checkOUT = checkOUT;
         this.room = room;
         this.customer = customer;
-        this.status = status;
     }
 
     public void setId(int id) {
@@ -38,19 +37,19 @@ public class Booking {
     public int getId() {
         return id;
     }
-    public LocalDateTime getCheckIN() {
+    public LocalDate getCheckIN() {
         return checkIN;
     }
 
-    public void setCheckIN(LocalDateTime checkIN) {
+    public void setCheckIN(LocalDate checkIN) {
         this.checkIN = checkIN;
     }
 
-    public LocalDateTime getCheckOUT() {
+    public LocalDate getCheckOUT() {
         return checkOUT;
     }
 
-    public void setCheckOUT(LocalDateTime checkOUT) {
+    public void setCheckOUT(LocalDate checkOUT) {
         this.checkOUT = checkOUT;
     }
 
@@ -70,17 +69,9 @@ public class Booking {
         this.customer = customer;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "Booking{" + "id=" + id + ", checkIN=" + checkIN + ", checkOUT=" + checkOUT + ", room=" + room + ", customer=" + customer + ", status=" + status + '}';
+        return "Booking{" + "id=" + id + ", checkIN=" + checkIN + ", checkOUT=" + checkOUT + ", room=" + room + ", customer=" + customer + '}';
     }
 
     

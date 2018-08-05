@@ -14,4 +14,5 @@ import model.Booking;
  */
 public interface BookingDAO {
      List<Booking> getAllBoking();
+     boolean createBooking(Booking b);
 }
